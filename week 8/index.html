@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="AC">
+    <meta name="description" content="Week 7 Assignment practicing Javascript & HTML">
+    <title>Week 8 | Homework Assignment</title>
+</head>
+<body>
+
+    <h1>List Your Characters</h1>
+	<p>
+		Please fill in the form and click the submit button.
+	</p>
+	<div>
+		<table>
+			<tr>
+				<td><label for="first"> Please Enter First Name</label></td>
+				<td><input id="first" type="text" name="first" placeholder="Ivan"></td>
+			</tr>
+			<tr>
+				<td><label for="last">Please Enter Last Name</label></td>
+				<td><input id="last" type="text" name="last" placeholder="Drago"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input id="button" type="button" value="submit"></td>
+			</tr>
+		</table>
+	<div>
+	<div id="output">
+	
+	</div>
+
+	
+    <script>
+	
+		
+		var fname = document.querySelector(`#first`);
+        var lname = document.querySelector(`#last`);
+		var submitButton = document.querySelector(`#button`);
+
+		
+		var people = [];
+
+		
+		submitButton.addEventListener("click", calcAndDisplay);
+
+		
+
+		function calcAndDisplay(e)
+		{
+			
+            var person = {
+				first: document.querySelector(`#first`).value,
+    			last: document.querySelector(`#last`).value 
+            };
+
+			
+			people.push(person);
+
+
+			
+			for(let i=0; i < people.length-1; i++)
+			{
+				for(let j=0; j < people.length-1; j++)
+				{
+					if(people[j].last > people[j+1].last)
+					{
+						let temp = people[j]
+						people[j] = people[j+1]
+						people[j+1] = temp
+					}
+				}
+			}
+			console.log(people)
+
+			//create a variable called 'output' that has an empty string value stored to 
+			var output = "";
+
+		//Loop through the objects in the people array
+		for (var i = 0; i < people.length; i += 1)
+		{ 
+			//Loop through each property in the object
+			for(key in people[i])
+			{
+				//The output should use the key set to uppercase using the .toUpperCase() String method as a title and the value of the key.
+				output += key.toUpperCase() + ": " + people[i][key] + "<br>";
+			}
+
+			//add a <hr> to the output at the end of this outter loop so a horizontal rule is displayed inbetween each person being displayed to the screen.
+			output += "<hr>";
+		}
+
+		//replace the outputDiv's inner HTML with the output string
+		document.querySelector("#output").innerHTML = output;
+
+
+
+
+				}
+	
+    </script>
+    
+</body>
+</html>
